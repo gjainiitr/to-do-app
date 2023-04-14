@@ -8,7 +8,8 @@ function TaskEntryBar({ onAddingTodo }) {
         if (task == null || task === "") {
             alert('No task to add. Task is empty');
         } else {            
-            onAddingTodo(task);            
+            onAddingTodo(task);
+            setTask("");
         }
     }
 
@@ -20,7 +21,7 @@ function TaskEntryBar({ onAddingTodo }) {
 
     return (
         <div className="TaskEntryBar">
-            <input name="taskentrybar" type="text" placeholder="Enter a task" onChange={ (event) => {setTask(event.target.value);} } onKeyDown={addTaskOnPressingEnter} />
+            <input name="taskentrybar" type="text" placeholder="Enter a task" value={task} onChange={ (event) => {setTask(event.target.value);} } onKeyDown={addTaskOnPressingEnter} />
             <button onClick={addTask}>Add</button>
         </div>
     );
