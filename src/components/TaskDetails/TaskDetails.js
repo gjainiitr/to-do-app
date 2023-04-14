@@ -2,10 +2,11 @@ import './TaskDetails.css';
 
 function TaskDetails({ tasks }) {
 
-    console.log(tasks);
-    
     const items = tasks.map((task) => 
-        <li>{task.title}</li>
+        <div>  
+            <input type="checkbox" checked={task.isCompleted}  className='task-details'/>
+            <p className='task-details'>{task.title}</p>
+        </div>
     );
 
     return (
