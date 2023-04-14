@@ -2,8 +2,10 @@ import './TaskDetails.css';
 
 function TaskDetails({ tasks }) {
 
+    console.log(tasks);
+    
     const items = tasks.map((task) => 
-        <li>{task}</li>
+        <li>{task.title}</li>
     );
 
     return (
