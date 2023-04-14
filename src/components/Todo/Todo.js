@@ -8,8 +8,7 @@ function Todo() {
     const [todos, setTodos] = useState([]);
 
     const addTodos = (todo) => {
-        setTodos([...todos, todo]);
-        console.log(todos);
+        setTodos([...todos, todo]);        
     }
 
     return (
