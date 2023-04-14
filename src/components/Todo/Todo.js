@@ -1,11 +1,10 @@
 import './Todo.css';
 import TaskEntryBar from '../TaskEntryBar/TaskEntryBar';
 import TaskDetails from '../TaskDetails/TaskDetails';
-import { useState } from 'react';
+import useLocalStorage from '../../hooks/localState';
 
 function Todo() {
-
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useLocalStorage("data", []);
 
     const addTodos = (todo) => {
         setTodos([...todos, todo]);        
