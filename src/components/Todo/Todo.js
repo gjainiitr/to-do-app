@@ -11,10 +11,14 @@ function Todo() {
         setTodos([...todos, todo]);        
     }
 
+    const modifyTodos = (todos) => {
+        setTodos(todos);
+    }
+
     return (
         <div className="Todo">
             <TaskEntryBar onAddingTodo={addTodos} />
-            <TaskDetails tasks={todos}/>
+            <TaskDetails tasks={todos} modifyTasks={modifyTodos}/>
         </div>
     );
 }

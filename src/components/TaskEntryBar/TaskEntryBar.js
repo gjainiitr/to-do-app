@@ -8,7 +8,11 @@ function TaskEntryBar({ onAddingTodo }) {
         if (task == null || task === "") {
             alert('No task to add. Task is empty');
         } else {            
-            onAddingTodo(task);
+            let newTask = {
+                isCompleted: false,
+                title: task
+            };
+            onAddingTodo(newTask);
             setTask("");
         }
     }
