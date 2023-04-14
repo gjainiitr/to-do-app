@@ -1,4 +1,5 @@
 import './TaskDetails.css';
+import deleteIcon from '../../assets/delete.svg';
 
 function TaskDetails({ tasks }) {
 
@@ -6,6 +7,7 @@ function TaskDetails({ tasks }) {
         <div>  
             <input type="checkbox" checked={task.isCompleted}  className='task-details'/>
             <p className='task-details'>{task.title}</p>
+            <img src={deleteIcon} alt='delete task' className='task-details delete-button'/>
         </div>
     );
 

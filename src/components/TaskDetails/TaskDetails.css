@@ -1,4 +1,10 @@
 .task-details {
     display: inline-block;
     margin: 5px;
+    vertical-align: middle;
+}
+
+.delete-button {
+    width: 15px;
+    height: 15px;
 }
