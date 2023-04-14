@@ -18,7 +18,7 @@ function TaskDetails({ tasks, modifyTasks }) {
     const items = tasks.map((task, index) => 
         <div>  
             <input type="checkbox" checked={task.isCompleted}  className='task-details' onChange={(event) => {handleCheckboxChange(index, event.target.checked)}}/>
-            <p className='task-details'>{task.title}</p>
+            <p className={`task-details ${task.isCompleted ? 'completed-task' : ''}`}>{task.title}</p>
             <img src={deleteIcon} alt='delete task' className='task-details delete-button' onClick={(event) => {handleTaskDeletion(index)}}/>
         </div>
     );

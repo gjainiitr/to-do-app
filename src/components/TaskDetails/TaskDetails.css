@@ -8,3 +8,8 @@
     width: 15px;
     height: 15px;
 }
+
+.completed-task {
+    color: green;
+    text-decoration: line-through;
+}
