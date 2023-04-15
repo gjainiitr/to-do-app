@@ -1,11 +1,18 @@
 import './Task.css';
 import deleteIcon from '../../assets/delete.svg';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function Task({ task, index, deleteTask, changeCompletionState, changeTaskTitle }) {
 
     const [isEditing, setIsEditing] = useState(false);
     const [newValue, setNewValue] = useState(task.title);
+    const refToInput = useRef(null);
+
+    useEffect(() => {
+        if (isEditing && refToInput.current) {
+            refToInput.current.focus();
+        }
+    }, [isEditing]);
 
     const changeEditingState = () => {
         setIsEditing(!isEditing);
@@ -33,7 +40,7 @@ function Task({ task, index, deleteTask, changeCompletionState, changeTaskTitle 
     return (
         <div className="Task">
             <input type="checkbox" checked={task.isCompleted}  className='task-details' onChange={(event) => {changeCompletionState(index, event.target.checked)}}/>
-            {isEditing && <input type="text" className='task-details' value={newValue} onChange={(event) => {setNewValue(event.target.value)}} onKeyDown={handleKeyPress} onBlur={finishEditing} />}
+            {isEditing && <input type="text" ref={refToInput} className='task-details' value={newValue} onChange={(event) => {setNewValue(event.target.value)}} onKeyDown={handleKeyPress} onBlur={finishEditing} />}
             {!isEditing && <p className={`task-details ${task.isCompleted ? 'completed-task' : ''}`} onClick={changeEditingState} >{task.title}</p>}
             <img src={deleteIcon} alt='delete task' className='task-details delete-button' onClick={(event) => {deleteTask(index)}}/>
         </div>
