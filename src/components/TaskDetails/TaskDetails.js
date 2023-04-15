@@ -1,5 +1,5 @@
 import './TaskDetails.css';
-import deleteIcon from '../../assets/delete.svg';
+import Task from '../Task/Task';
 
 function TaskDetails({ tasks, modifyTasks }) {
 
@@ -15,12 +15,14 @@ function TaskDetails({ tasks, modifyTasks }) {
         modifyTasks(newTasks);
     }
 
+    const handleTaskTitleChange = (index, value) => {
+        let newTasks = [...tasks];
+        newTasks[index].title = value;
+        modifyTasks(newTasks);
+    }
+
     const items = tasks.map((task, index) => 
-        <div>  
-            <input type="checkbox" checked={task.isCompleted}  className='task-details' onChange={(event) => {handleCheckboxChange(index, event.target.checked)}}/>
-            <p className={`task-details ${task.isCompleted ? 'completed-task' : ''}`}>{task.title}</p>
-            <img src={deleteIcon} alt='delete task' className='task-details delete-button' onClick={(event) => {handleTaskDeletion(index)}}/>
-        </div>
+        <Task task={task} index={index} deleteTask={handleTaskDeletion} changeCompletionState={handleCheckboxChange} changeTaskTitle={handleTaskTitleChange} />
     );
 
     return (
