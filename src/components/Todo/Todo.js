@@ -2,9 +2,11 @@ import './Todo.css';
 import TaskEntryBar from '../TaskEntryBar/TaskEntryBar';
 import TaskDetails from '../TaskDetails/TaskDetails';
 import useLocalStorage from '../../hooks/localState';
+import {useState} from 'react';
 
 function Todo() {
     const [todos, setTodos] = useLocalStorage("data", []);
+    const [filter, setFilter] = useState("all"); 
 
     const addTodos = (todo) => {
         setTodos([...todos, todo]);        
@@ -14,9 +16,13 @@ function Todo() {
         setTodos(todos);
     }
 
+    const changeFilter = (newFilter) => {
+        setFilter(newFilter);
+    }
+
     return (
         <div className="Todo">
-            <TaskEntryBar onAddingTodo={addTodos} />
+            <TaskEntryBar selectedFilter={filter} onAddingTodo={addTodos} onChangingFilter={changeFilter} />
             <TaskDetails tasks={todos} modifyTasks={modifyTodos}/>
         </div>
     );
