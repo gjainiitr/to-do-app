@@ -29,8 +29,13 @@ function Task({ task, index, deleteTask, changeCompletionState, changeTaskTitle 
     }
 
     const handleKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            finishEditing();
+        if (event.key === 'Enter') {            
+            if (newValue === '') {
+                cancelEditing();
+                return;
+            } else {
+                finishEditing();
+            }
         }
         if (event.key === 'Escape') {
             cancelEditing();
