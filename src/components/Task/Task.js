@@ -9,6 +9,10 @@ function Task({ task, index, deleteTask, changeCompletionState, changeTaskTitle 
     const refToInput = useRef(null);
 
     useEffect(() => {
+        setNewValue(task.title);
+    }, [task.title]);
+
+    useEffect(() => {
         if (isEditing && refToInput.current) {
             refToInput.current.focus();
         }
