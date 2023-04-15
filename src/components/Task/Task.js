@@ -44,10 +44,33 @@ function Task({ task, index, deleteTask, changeCompletionState, changeTaskTitle 
 
     return (
         <div className="Task">
-            <input type="checkbox" checked={task.isCompleted}  className='task-details' onChange={(event) => {changeCompletionState(index, event.target.checked)}}/>
-            {isEditing && <input type="text" ref={refToInput} className='task-details' value={newValue} onChange={(event) => {setNewValue(event.target.value)}} onKeyDown={handleKeyPress} onBlur={finishEditing} />}
-            {!isEditing && <p className={`task-details ${task.isCompleted ? 'completed-task' : ''}`} onClick={changeEditingState} >{task.title}</p>}
-            <img src={deleteIcon} alt='delete task' className='task-details delete-button' onClick={(event) => {deleteTask(index)}}/>
+            <input 
+                type="checkbox" 
+                checked={task.isCompleted}  
+                className='task-details' 
+                onChange={(event) => {changeCompletionState(index, event.target.checked)}} />
+            {isEditing
+            && <input 
+                    type="text" 
+                    ref={refToInput} 
+                    className='task-details' 
+                    value={newValue} 
+                    onChange={(event) => {setNewValue(event.target.value)}} 
+                    onKeyDown={handleKeyPress} 
+                    onBlur={finishEditing} />}
+            {!isEditing 
+            && <p 
+                    className={`task-details ${task.isCompleted ? 'completed-task' : ''}`} 
+                    tabIndex={0} 
+                    onKeyDown={(event) => {if (event.key === 'Enter' || event.key === ' ') {changeEditingState()}}}
+                    onClick={changeEditingState} >{task.title}</p>}
+            <img 
+                src={deleteIcon} 
+                alt='delete task' 
+                tabIndex={0} 
+                className='task-details delete-button' 
+                onKeyDown={(event) => {if (event.key === 'Enter' || event.key === ' ') {deleteTask(index)}}}
+                onClick={(event) => {deleteTask(index)}} />
         </div>
     );
 }
