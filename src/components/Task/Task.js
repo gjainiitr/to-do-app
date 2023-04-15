@@ -11,15 +11,29 @@ function Task({ task, index, deleteTask, changeCompletionState, changeTaskTitle 
         setIsEditing(!isEditing);
     }
 
-    const handleFinishEditing = () => {
+    const cancelEditing = () => {
+        setNewValue(task.title);
         changeEditingState();
+    }
+
+    const finishEditing = () => {
         changeTaskTitle(index, newValue);        
+        changeEditingState();
+    }
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            finishEditing();
+        }
+        if (event.key === 'Escape') {
+            cancelEditing();
+        }
     }
 
     return (
         <div className="Task">
             <input type="checkbox" checked={task.isCompleted}  className='task-details' onChange={(event) => {changeCompletionState(index, event.target.checked)}}/>
-            {isEditing && <input type="text" className='task-details' value={newValue} onChange={(event) => {setNewValue(event.target.value)}} onBlur={handleFinishEditing} />}
+            {isEditing && <input type="text" className='task-details' value={newValue} onChange={(event) => {setNewValue(event.target.value)}} onKeyDown={handleKeyPress} onBlur={finishEditing} />}
             {!isEditing && <p className={`task-details ${task.isCompleted ? 'completed-task' : ''}`} onClick={changeEditingState} >{task.title}</p>}
             <img src={deleteIcon} alt='delete task' className='task-details delete-button' onClick={(event) => {deleteTask(index)}}/>
         </div>
