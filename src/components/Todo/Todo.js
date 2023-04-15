@@ -23,7 +23,7 @@ function Todo() {
     return (
         <div className="Todo">
             <TaskEntryBar selectedFilter={filter} onAddingTodo={addTodos} onChangingFilter={changeFilter} />
-            <TaskDetails tasks={todos} modifyTasks={modifyTodos}/>
+            <TaskDetails tasks={todos} selectedFilter={filter} modifyTasks={modifyTodos}/>
         </div>
     );
 }

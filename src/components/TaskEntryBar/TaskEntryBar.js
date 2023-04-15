@@ -30,7 +30,7 @@ function TaskEntryBar({ selectedFilter, onAddingTodo, onChangingFilter }) {
                 <button onClick={addTask}>Add</button>
             </div>
             <div className="Filter">
-                <select value={selectedFilter} onChange={(event) => {onChangingFilter(event.value)}}>
+                <select value={selectedFilter} onChange={(event) => {onChangingFilter(event.target.value)}}>
                     <option value="all">All</option>
                     <option value="finished">Finished</option>
                     <option value="unfinished">Unfinished</option>

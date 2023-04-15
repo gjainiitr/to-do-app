@@ -1,7 +1,7 @@
 import './TaskDetails.css';
 import Task from '../Task/Task';
 
-function TaskDetails({ tasks, modifyTasks }) {
+function TaskDetails({ tasks, selectedFilter, modifyTasks }) {
 
     const handleCheckboxChange = (index, value) => {
         let newTasks = [...tasks];
@@ -21,9 +21,16 @@ function TaskDetails({ tasks, modifyTasks }) {
         modifyTasks(newTasks);
     }
 
-    const items = tasks.map((task, index) => 
-        <Task task={task} index={index} deleteTask={handleTaskDeletion} changeCompletionState={handleCheckboxChange} changeTaskTitle={handleTaskTitleChange} />
-    );
+    const items = tasks
+        .map((task, index) => {
+            if (selectedFilter === "all") {
+                return <Task task={task} index={index} deleteTask={handleTaskDeletion} changeCompletionState={handleCheckboxChange} changeTaskTitle={handleTaskTitleChange} />
+            } else if (selectedFilter === "finished" && task.isCompleted) {
+                return <Task task={task} index={index} deleteTask={handleTaskDeletion} changeCompletionState={handleCheckboxChange} changeTaskTitle={handleTaskTitleChange} />
+            } else if (selectedFilter === "unfinished" && !task.isCompleted) {
+                return <Task task={task} index={index} deleteTask={handleTaskDeletion} changeCompletionState={handleCheckboxChange} changeTaskTitle={handleTaskTitleChange} />
+            }
+        });
 
     return (
         <div className="TaskDetails">
