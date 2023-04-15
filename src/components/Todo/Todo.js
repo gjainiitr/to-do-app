@@ -12,6 +12,15 @@ function Todo() {
         setTodos([...todos, todo]);        
     }
 
+    const deleteCompletedTasks = () => {
+        let newTasks = todos;
+        newTasks = todos.filter((task) => {
+            if (!task.isCompleted) return true;
+            else return false;
+        })
+        setTodos(newTasks);
+    }
+
     const modifyTodos = (todos) => {
         setTodos(todos);
     }
@@ -22,7 +31,7 @@ function Todo() {
 
     return (
         <div className="Todo">
-            <TaskEntryBar selectedFilter={filter} onAddingTodo={addTodos} onChangingFilter={changeFilter} />
+            <TaskEntryBar selectedFilter={filter} onAddingTodo={addTodos} onChangingFilter={changeFilter} deleteCompletedTasks={deleteCompletedTasks} />
             <TaskDetails tasks={todos} selectedFilter={filter} modifyTasks={modifyTodos}/>
         </div>
     );

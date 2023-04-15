@@ -1,7 +1,7 @@
 import "./TaskEntryBar.css";
 import { useState } from "react";
 
-function TaskEntryBar({ selectedFilter, onAddingTodo, onChangingFilter }) {
+function TaskEntryBar({ selectedFilter, onAddingTodo, onChangingFilter, deleteCompletedTasks }) {
     const [task, setTask] = useState("");
 
     const addTask = () => {
@@ -29,12 +29,13 @@ function TaskEntryBar({ selectedFilter, onAddingTodo, onChangingFilter }) {
                 <input name="taskentrybar" type="text" placeholder="Enter a task" value={task} onChange={ (event) => {setTask(event.target.value);} } onKeyDown={addTaskOnPressingEnter} />
                 <button onClick={addTask}>Add</button>
             </div>
-            <div className="Filter">
+            <div className="Actions">
                 <select value={selectedFilter} onChange={(event) => {onChangingFilter(event.target.value)}}>
                     <option value="all">All</option>
                     <option value="finished">Finished</option>
                     <option value="unfinished">Unfinished</option>
                 </select>
+                <button onClick={deleteCompletedTasks}>Delete completed</button>
             </div>
         </div>
     );
